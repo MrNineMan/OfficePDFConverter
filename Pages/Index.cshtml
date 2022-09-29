@@ -1,0 +1,24 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+@if (Model.message.Length > 0) 
+{
+     <p style="color:red">@Model.message</p>
+   
+}
+
+<div class="container">
+    <form method="post">
+        <H3>Enter directory for conversion:</H3>
+        <label>Directory:</label>
+        <input type= 'text' id="directory" name="directory" ><br><br>
+        <input type="submit" value="Convert">
+        
+    </form>
+
+</div>
+

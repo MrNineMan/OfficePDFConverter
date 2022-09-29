@@ -1,0 +1,51 @@
+﻿@page
+@model PrivacyModel
+@{
+    ViewData["Title"] = "Privacy Policy";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Use this page to detail your site's privacy policy.</p>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="./lib/PDFViewCtrl.css">
+
+</head>
+<body>
+    <div id="pdf-viewer"></div>
+   
+    @section scripts {
+
+
+        <script type="text/javascript">
+            console.log('We get here');
+            try {
+                var pdfViewer = new PDFViewCtrl.PDFViewer({
+                    libPath: '/lib/', // the library path of Web SDK.
+                    jr: {
+                        licenseSN: licenseSN,
+                        licenseKey: licenseKey
+                    }
+                });
+                pdfViewer.init('#pdf-viewer'); // the div (id="pdf-viewer")
+            } catch (e) {
+                console.log(e.message);
+            }
+            //modify the file path as your need.
+
+            //let response = await getAllPosts();
+            fetch('/Artwork.pdf').then(function (response) {
+                response.arrayBuffer().then(function (buffer) {
+                    pdfViewer.openPDFByFile(buffer);
+                })
+            }).catch(error => {
+                console.log(error);
+            });
+
+
+
+        </script>
+    }
+
+    </body>
